@@ -6,6 +6,8 @@ class Karakter(ABC):
         self.hp_a = hp_a
         self._hp = hp_a      
         self.defen = defen
+        self.skill = []
+    def tambah
     @property
     def hp(self):
         return self._hp
@@ -28,6 +30,10 @@ class heal:
 class inventory:
     def __init__(self):
         self.item = []
+    def tambah_i(self,barang):
+        self.item.append(barang)
+    def buang_i(self,barang):
+        self.item.remove(barang)
 class pemain(Karakter,heal):
     def __init__(self, nama, hp_a, atk,defen):
         super().__init__(nama, hp_a, atk,defen)
@@ -49,8 +55,11 @@ cerbe.menyerang(player)
 print(player.hp)
 player.hp += 500
 print(player.hp)
-player.tas.item.append("Book")
 print(cerbe.defen)
-print(player.tas.item[0])
 player.menyembuhkan()
 print(pemain.mro())
+player.tas.tambah_i("Baju")
+player.tas.tambah_i("Helm")
+print(player.tas.item)
+player.tas.buang_i("Helm")
+print(player.tas.item)
