@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from Book_skill import *
 class Karakter(ABC):
     def __init__(self,nama,hp_a,atk,defen):
         self.nama = nama
@@ -6,8 +7,6 @@ class Karakter(ABC):
         self.hp_a = hp_a
         self._hp = hp_a      
         self.defen = defen
-        self.skill = []
-    def tambah
     @property
     def hp(self):
         return self._hp
@@ -22,30 +21,44 @@ class Karakter(ABC):
         self.serang()
         target.hp -= hasil
         print(f"{self.nama} berhasil memberi {hasil} DMG ")
-class heal:
+class Heal:
     def menyembuhkan(self):
-        heel = int(self.hp * 0.3)
-        self.hp += heel
-        print(f"{self.nama} berhasil menyembuhkan {heel} HP")
+        heal = int(self.hp * 0.3)
+        self.hp += heal
+        print(f"{self.nama} berhasil menyembuhkan {heal} HP")
 class inventory:
     def __init__(self):
         self.item = []
-    def tambah_i(self,barang):
+    def tambah(self,barang):
         self.item.append(barang)
-    def buang_i(self,barang):
+    def buang(self,barang):
         self.item.remove(barang)
-class pemain(Karakter,heal):
+class Skill:
+    def __init__(self):
+        self.skillp = []
+    def tambah(self,barang):
+        self.skillp.append(barang)
+    def buang(self,barang):
+        self.skillp.remove(barang)
+class pemain(Karakter,Heal):
     def __init__(self, nama, hp_a, atk,defen):
         super().__init__(nama, hp_a, atk,defen)
         self.tas = inventory()
+        self.skill = Skill()
     def serang(self):
-        print(f"{self.nama} menyerang pake otak")
+        print(f"{self.nama} menyerang pake {self.skill}")
 class musuh(Karakter):
+    def __init__(self, nama, hp_a, atk,defen):
+        super().__init__(nama, hp_a, atk,defen)
+        self.skill = Skill()
     def serang(self):
-        print(f"{self.nama} menyerang pake kekuatan")
+        print(f"{self.nama} menyerang pake {self.skill}")
 class boss(Karakter):
+    def __init__(self, nama, hp_a, atk,defen):
+        super().__init__(nama, hp_a, atk,defen)
+        self.skill = Skill()
     def serang(self):
-        print(f"{self.nama} menyerang pake bomb")
+        print(f"{self.nama} menyerang pake {self.skill}")
 player = pemain("Udin",300,100,30)
 goblin = musuh("Goblin",300,50,0)
 cerbe = boss("Cerberus",400,500,50)
@@ -58,8 +71,10 @@ print(player.hp)
 print(cerbe.defen)
 player.menyembuhkan()
 print(pemain.mro())
-player.tas.tambah_i("Baju")
-player.tas.tambah_i("Helm")
+player.tas.tambah("Baju")
+player.tas.tambah("Helm")
 print(player.tas.item)
-player.tas.buang_i("Helm")
+player.tas.buang("Helm")
 print(player.tas.item)
+player.skill.tambah(shot)
+print(player.skill.skillp[0].nama)
