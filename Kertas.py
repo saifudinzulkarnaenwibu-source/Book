@@ -1,3 +1,4 @@
+import json
 class Karakter():
     def __init__(self,nama,hp_a,atk,defp,defm):
         self.nama = nama
@@ -9,7 +10,6 @@ class Karakter():
     @property
     def persen_hp(self):
         return f"{self._hp // self.hp_a *100}%"
-
     @property
     def hp(self):
         return self._hp
@@ -22,6 +22,11 @@ class Karakter():
         print(f"{self.nama} berhasil memberi {hasil} DMG ")
     def __str__(self):
         return self.nama
+    def data(self):
+        return {"nama":self.nama,"atk":self.atk,"hp_a":self.hp_a,"defp":self.defp,"defm":self.defm}
+    @classmethod
+    def ubah_data(cls,data):
+        return cls(data["nama"],data["atk"],data["hp_a"],data["defp"],data["defm"])
 class inventory:
     def __init__(self):
         self.item = []
@@ -34,6 +39,10 @@ class pemain(Karakter):
         super().__init__(nama, hp_a, atk,defp,defm)
         self.tas = inventory()
         self.mana = mana
+    def data(self):
+        return {"nama":self.nama,"atk":self.atk,"hp_a":self.hp_a,"defp":self.defp,"defm":self.defm,"tas":self.tas,"mana":self.mana}
+    def ubah_data(cls,data):
+        return cls(data["nama"],data["atk"],data["hp_a"],data["defp"],data["defm"],data["tas"],data["mana"])
 class musuh(Karakter):
     pass
 class boss(Karakter):
@@ -44,3 +53,9 @@ cerbe = boss("Cerberus",400,500,50,0)
 print(player.persen_hp)
 print(player)
 print(player.hp)
+print(player.data())
+with open("save.json","w") as file:
+    json.dump(player.data(),file,indent=4)
+with open("save.json","r") as file:
+    hasil_data = json.load(file)
+player = pemain.ubah_data(hasil_data)
