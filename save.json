@@ -1,7 +1,1 @@
-{
-    "nama": "Udin",
-    "atk": 100,
-    "hp_a": 300,
-    "defp": 30,
-    "defm": 0,
-    "tas": 
+{"nama": "Udin", "atk": 100, "hp_a": 300, "hp": 300, "defp": 30, "defm": 0, "tas": {"item": ["Buku"]}, "mana": 200}
